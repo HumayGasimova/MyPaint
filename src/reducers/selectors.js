@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+
 const getMousePressed = (state) => state.paint.mousePressed;
 
 export const getMousePressedState = createSelector(
