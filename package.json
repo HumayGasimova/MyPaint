@@ -1,14 +1,59 @@
 {
   "name": "webpack-demo",
   "version": "1.0.0",
-  "description": "",
+  "main": "electronSetUp.js",
+  "homepage": "./",
+  "build": {
+    "appId": "com.example.electron-cra",
+    "productName": "My paint",
+    "copyright": "Copyright © 2020 Humay Gasimova",
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "directories": {
+      "buildResources": "build"
+    }
+  },
+  "description": "My paint",
   "private": true,
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
     "deploy:firebase": "npm run build && firebase deploy",
     "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "electron-build": "electron-builder",
+    "start-electron": "electron electronSetUp.js",
+    "package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\"",
+    "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
+    "create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app electron-tutorial-app --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns",
+    "create-installer-win": "node installers/windows/createinstaller.js",
+    "preelectron-pack": "npm run build",
+    "electron-pack": "npm run electron-build -c.extraMetadata.main=build/Main.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +67,10 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.1",
+    "electron": "^10.1.5",
+    "electron-builder": "^22.9.1",
+    "electron-is-dev": "^1.2.0",
+    "electron-winstaller": "^4.0.1",
     "enzyme": "^3.10.0",
     "file-loader": "^3.0.1",
     "history": "^4.10.1",
@@ -44,7 +93,10 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
     "axios": "^0.19.0",
+    "concurrently": "^5.3.0",
     "connected-react-router": "^6.5.2",
+    "cross-env": "^7.0.2",
+    "electron-squirrel-startup": "^1.0.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "firebase-tools": "^7.5.0",
     "jest": "^24.9.0",
@@ -59,6 +111,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "rxjs": "^6.5.3",
-    "rxjs-compat": "^6.5.3"
+    "rxjs-compat": "^6.5.3",
+    "wait-on": "^5.2.0"
   }
 }
