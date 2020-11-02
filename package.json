@@ -1,12 +1,16 @@
 {
   "name": "webpack-demo",
   "version": "1.0.0",
-  "main": "electronSetUp.js",
+  "main": "main.js",
   "homepage": "./",
   "build": {
     "appId": "com.example.electron-cra",
     "productName": "My paint",
     "copyright": "Copyright © 2020 Humay Gasimova",
+    "files": [
+      "build/**/*",
+      "./main.js"
+    ],
     "dmg": {
       "contents": [
         {
@@ -34,7 +38,8 @@
       "category": "Development"
     },
     "directories": {
-      "buildResources": "build"
+      "buildResources": "assets",
+      "output": "build"
     }
   },
   "description": "My paint",
@@ -46,7 +51,7 @@
     "test": "jest --config ./jest.config.json",
     "test:watch": "npm run test -- --watch",
     "electron-build": "electron-builder",
-    "start-electron": "electron electronSetUp.js",
+    "start-electron": "electron main.js",
     "package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\"",
     "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",

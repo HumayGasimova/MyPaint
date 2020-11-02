@@ -55,10 +55,10 @@ module.exports = {
   },
   output: {
     filename: 'transformed.js',
-    path: __dirname + '/dist'
+    path: __dirname + '/build'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './build',
     port: 8080,
     historyApiFallback: true
   },
